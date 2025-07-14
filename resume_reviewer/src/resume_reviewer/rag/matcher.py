@@ -19,14 +19,16 @@ class AdvancedMatcher:
         skill_patterns = [
             # Programming languages
             r'\b(?:python|java|javascript|typescript|c\+\+|c#|go|rust|php|ruby|swift|kotlin|scala)\b',
-            # Web technologies
-            r'\b(?:html|css|react|angular|vue|node\.js|express|django|flask|spring|laravel)\b',
+            # Web technologies  
+            r'\b(?:html5?|css3?|react|angular|vue(?:\.js)?|node(?:\.js)?|express|django|flask|spring|laravel)\b',
             # Databases
-            r'\b(?:mysql|postgresql|mongodb|redis|elasticsearch|oracle|sql server)\b',
+            r'\b(?:mysql|postgresql|mongodb|redis|elasticsearch|oracle|sql\s*server)\b',
             # Cloud & DevOps
             r'\b(?:aws|azure|gcp|docker|kubernetes|jenkins|terraform|ansible)\b',
             # Tools & Frameworks
             r'\b(?:git|github|gitlab|jira|confluence|figma|photoshop|illustrator)\b',
+            # Additional web skills
+            r'\b(?:bootstrap|tailwind|jquery|webpack|babel|sass|scss)\b',
         ]
         
         skills = set()
@@ -38,9 +40,26 @@ class AdvancedMatcher:
         
         # Also extract from skills sections
         skills_section = self.embedder.extract_skills_section(text)
-        skills.update([skill.lower() for skill in skills_section])
         
-        return list(skills)
+        # Clean and filter skills section results
+        for skill in skills_section:
+            # Only include skills that are 1-3 words and not sentences
+            clean_skill = skill.lower().strip()
+            if len(clean_skill.split()) <= 3 and len(clean_skill) <= 30:
+                skills.add(clean_skill)
+        
+        # Convert to list and clean up
+        clean_skills = []
+        for skill in skills:
+            skill = skill.lower().strip()
+            # Filter out non-skill words and ensure it's actually a skill
+            if (len(skill) >= 2 and 
+                not skill in ['the', 'and', 'or', 'in', 'of', 'to', 'a', 'an', 'is', 'are', 'for', 'with'] and
+                not skill.startswith('http') and
+                len(skill.split()) <= 3):
+                clean_skills.append(skill)
+        
+        return list(set(clean_skills))
     
     def calculate_experience_years(self, text: str) -> int:
         """Extract years of experience from text"""
@@ -49,21 +68,37 @@ class AdvancedMatcher:
             r'(\d+)\+?\s*years?\s*(?:of\s*)?experience',
             r'(\d+)\+?\s*years?\s*in',
             r'experience\s*[:\-]\s*(\d+)\+?\s*years?',
+            r'(\d+)\s*years?\s*(?:of\s*)(?:professional\s*)?experience',
         ]
         
         years = []
+        text_lower = text.lower()
+        
         for pattern in patterns:
-            matches = re.findall(pattern, text.lower())
+            matches = re.findall(pattern, text_lower)
             years.extend([int(match) for match in matches])
         
-        return max(years) if years else 0
+        # If no explicit experience mentioned, check if student/intern
+        if not years:
+            student_patterns = [
+                r'\bundergraduat[e]?\b',
+                r'\bstudent\b',
+                r'\bintern\b',
+                r'\bfresh\s*graduat[e]?\b'
+            ]
+            
+            for pattern in student_patterns:
+                if re.search(pattern, text_lower):
+                    return 0  # Student/Fresh graduate
+        
+        return max(years) if years else 1  # Default to 1 if no clear indication
     
     def extract_education_level(self, text: str) -> str:
         """Extract education level from text"""
         education_patterns = {
             'phd': r'\b(?:phd|ph\.d|doctorate|doctoral)\b',
             'masters': r'\b(?:masters?|m\.s|m\.a|mba|master of)\b',
-            'bachelors': r'\b(?:bachelors?|b\.s|b\.a|bachelor of)\b',
+            'bachelors': r'\b(?:bachelors?|bachelor\'s|b\.s|b\.a|bachelor of|computer science|engineering)\b',
             'associate': r'\b(?:associate|a\.s|a\.a)\b',
         }
         
@@ -72,7 +107,7 @@ class AdvancedMatcher:
             if re.search(pattern, text_lower):
                 return level
         
-        return 'unknown'
+        return 'student'
     
     def calculate_match_score(self, resume_skills: List[str], job_skills: List[str]) -> float:
         """Calculate match percentage between resume and job skills"""
@@ -98,7 +133,17 @@ class AdvancedMatcher:
         job_set = set(skill.lower().strip() for skill in job_skills)
         
         missing = job_set - resume_set
-        return list(missing)
+        
+        # Filter missing skills to only include actual skills (not sentences)
+        filtered_missing = []
+        for skill in missing:
+            # Only include if it's 1-3 words and looks like a technology/skill
+            if (len(skill.split()) <= 3 and 
+                len(skill) <= 30 and 
+                not any(word in skill for word in ['experience', 'knowledge', 'understanding', 'skills', 'ability', 'familiarity'])):
+                filtered_missing.append(skill)
+        
+        return filtered_missing
     
     def generate_recommendations(self, missing_skills: List[str], match_score: float) -> str:
         """Generate improvement recommendations"""

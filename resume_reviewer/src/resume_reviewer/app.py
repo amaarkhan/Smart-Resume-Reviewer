@@ -9,6 +9,7 @@ import json
 import threading
 import time
 import uuid
+import re
 from datetime import datetime
 from flask import Flask, render_template, request, jsonify, redirect, url_for, send_file
 from werkzeug.utils import secure_filename
@@ -17,6 +18,7 @@ import tempfile
 # Import our backend components
 from resume_reviewer.crew import ResumeReviewer
 from resume_reviewer.pdf_reader import extract_text_from_pdf
+from resume_reviewer.rag.matcher import compare_resume_to_job
 
 app = Flask(__name__)
 app.secret_key = 'smart-resume-reviewer-secret-key-2025'
@@ -75,7 +77,10 @@ def run_analysis_in_background(session_id, resume_text, job_description):
             'progress': 75
         })
         
-        # Run the actual CrewAI analysis
+        # Use RAG matcher for skills analysis (faster than full CrewAI)
+        rag_result = compare_resume_to_job(resume_text, job_description)
+        
+        # Run the actual CrewAI analysis for detailed reports
         inputs = {
             'resume_text': resume_text,
             'job_description': job_description,
@@ -91,7 +96,30 @@ def run_analysis_in_background(session_id, resume_text, job_description):
         
         time.sleep(1)
         
-        # Complete analysis
+        # Extract profile information from CrewAI resume analysis output
+        resume_analysis = str(result.tasks_output[0])
+        
+        # Extract experience years from resume analysis
+        experience_match = re.search(r'(\d+)\s*years?\s*(?:of\s*)?experience', resume_analysis.lower())
+        if experience_match:
+            experience_years = int(experience_match.group(1))
+        elif 'undergraduate' in resume_analysis.lower() or 'student' in resume_analysis.lower():
+            experience_years = 0
+        else:
+            experience_years = rag_result.get('experience_years', 0)
+        
+        # Extract education level from resume analysis
+        education_level = 'Unknown'
+        if 'bachelor' in resume_analysis.lower() or 'computer science' in resume_analysis.lower():
+            education_level = 'Bachelors'
+        elif 'master' in resume_analysis.lower():
+            education_level = 'Masters'
+        elif 'phd' in resume_analysis.lower() or 'doctorate' in resume_analysis.lower():
+            education_level = 'PhD'
+        else:
+            education_level = rag_result.get('education_level', 'Unknown').title()
+        
+        # Complete analysis using RAG results for skills
         analysis_status[session_id].update({
             'status': 'completed',
             'stage': 'Complete',
@@ -101,9 +129,11 @@ def run_analysis_in_background(session_id, resume_text, job_description):
                 'job_analysis': str(result.tasks_output[1]),
                 'match_analysis': str(result.tasks_output[2]),
                 'email': str(result.tasks_output[3]) if len(result.tasks_output) > 3 else "Email generation not available",
-                'match_score': extract_match_score(str(result.tasks_output[2])),
-                'matched_skills': extract_skills(str(result.tasks_output[2]), 'matched'),
-                'missing_skills': extract_skills(str(result.tasks_output[2]), 'missing')
+                'match_score': rag_result['match_score'],
+                'present_skills': rag_result['present_skills'],  # These are already clean skill names
+                'missing_skills': [skill for skill in rag_result['missing_skills'] if len(skill.split()) <= 3],  # Filter out long descriptions
+                'experience_years': experience_years,
+                'education_level': education_level
             }
         })
         
@@ -118,31 +148,6 @@ def extract_match_score(match_text):
     import re
     match = re.search(r'(\d+(?:\.\d+)?)\s*%', match_text)
     return f"{match.group(1)}%" if match else "0%"
-
-def extract_skills(match_text, skill_type):
-    """Extract skills from analysis text"""
-    # This is a simplified extraction - you might want to improve this
-    if skill_type == 'matched':
-        # Look for patterns indicating matched skills
-        skills = []
-        lines = match_text.split('\n')
-        for line in lines:
-            if 'matching' in line.lower() or 'present' in line.lower():
-                # Extract skills from this line
-                import re
-                skill_matches = re.findall(r'\b[A-Z][a-z]+(?:\s+[A-Z][a-z]+)*\b', line)
-                skills.extend(skill_matches[:5])  # Limit to 5 skills
-        return skills[:5]
-    else:
-        # Look for missing/required skills
-        skills = []
-        lines = match_text.split('\n')
-        for line in lines:
-            if 'missing' in line.lower() or 'required' in line.lower() or 'needed' in line.lower():
-                import re
-                skill_matches = re.findall(r'\b[A-Z][a-z]+(?:\s+[A-Z][a-z]+)*\b', line)
-                skills.extend(skill_matches[:5])
-        return skills[:5]
 
 @app.route('/')
 def index():
