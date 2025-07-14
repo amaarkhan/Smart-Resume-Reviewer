@@ -1,0 +1,136 @@
+parse_resume_task:
+  description: >
+    Thoroughly analyze the following resume text to extract and structure all relevant information including:
+    - Personal information (name, contact details if available)
+    - Professional summary or objective
+    - Technical skills and competencies
+    - Work experience with years and achievements
+    - Education background
+    - Certifications and awards
+    - Projects and notable accomplishments
+    
+    Resume Text: {resume_text}
+    
+    Create a comprehensive profile that highlights the candidate's strengths and qualifications.
+  expected_output: >
+    A detailed structured summary containing:
+    1. Candidate Profile (name, experience level)
+    2. Core Technical Skills (categorized: programming languages, frameworks, tools, databases)
+    3. Professional Experience (years of experience, key roles, major achievements)
+    4. Education & Certifications
+    5. Notable Projects or Accomplishments
+    6. Soft Skills identified from descriptions
+    Format as clear sections with bullet points for easy reading.
+  agent: resume_extractor
+
+parse_job_task:
+  description: >
+    Analyze the following job description comprehensively to identify and categorize:
+    - Job title, company, and location
+    - Required technical skills and proficiency levels
+    - Preferred qualifications and nice-to-have skills
+    - Years of experience required
+    - Education requirements
+    - Job responsibilities and daily tasks
+    - Company culture and values mentioned
+    - Salary range or benefits (if mentioned)
+    
+    Job Description: {job_description}
+    
+    Distinguish between must-have requirements and preferred qualifications.
+  expected_output: >
+    A structured analysis containing:
+    1. Position Overview (title, company, location, experience level)
+    2. Required Technical Skills (must-have vs nice-to-have)
+    3. Education & Experience Requirements
+    4. Key Responsibilities and Expectations
+    5. Company Culture & Values
+    6. Growth Opportunities mentioned
+    Format as organized sections with clear categorization.
+  agent: job_extractor
+
+match_task:
+  description: >
+    Perform a comprehensive matching analysis between the resume and job description:
+    
+    Resume Analysis (from previous task): {task_outputs[0]}
+    Job Description Analysis (from previous task): {task_outputs[1]}
+    
+    1. Calculate precise match percentage based on skills alignment
+    2. Identify skills present in resume that match job requirements
+    3. List missing skills that are required/preferred for the position
+    4. Analyze experience level compatibility
+    5. Evaluate education requirement fulfillment
+    6. Assess overall candidate fit for the role
+    7. Provide specific, actionable recommendations for resume improvement
+    8. Suggest areas for skill development
+    
+    Use the RAG matching tool with the original texts:
+    Resume Text: {resume_text}
+    Job Description: {job_description}
+  expected_output: >
+    A comprehensive professional analysis with:
+    
+    1. **MATCH SCORE VISUALIZATION**
+       - Visual progress bar showing percentage match
+       - Color-coded rating (Excellent/Good/Moderate/Needs Improvement)
+    
+    2. **SKILLS ANALYSIS TABLE**
+       - Professional formatted table showing:
+         ✅ MATCHING SKILLS (skills found in both resume and job)
+         ❌ SKILLS TO DEVELOP (missing skills from job requirements)
+    
+    3. **CANDIDATE PROFILE**
+       - Experience level and education
+       - Skills summary count
+    
+    4. **PROFESSIONAL RECOMMENDATIONS**
+       - Specific, actionable advice for improvement
+       - Areas for skill development prioritized by importance
+    
+    Present the analysis in a clean, professional format with clear visual elements,
+    tables, and user-friendly layout. Avoid technical jargon and focus on actionable insights.
+  agent: matchmaker
+
+email_task:
+  description: >
+    Create a professional, personalized job application email based on:
+    
+    Resume Analysis: {task_outputs[0]}
+    Job Description Analysis: {task_outputs[1]}
+    Matching Analysis: {task_outputs[2]}
+    
+    Extract the candidate's name from the resume text: {resume_text}
+    Extract company name and position from job description: {job_description}
+    
+    STRICT REQUIREMENTS - NO PLACEHOLDERS ALLOWED:
+    - Write a complete, ready-to-send email
+    - Use ONLY information available in the provided texts
+    - Extract and use the candidate's actual name from resume
+    - Extract and use the actual company name and position from job description
+    - If information is missing, write the email without it - do NOT use placeholders
+    - Professional greeting: "Dear Hiring Manager,"
+    - Highlight 2-3 most relevant qualifications from resume
+    - Express genuine interest in the position
+    - Professional closing with candidate's name
+    - Length: 150-200 words
+    - Ready to copy and send without any editing
+  expected_output: >
+    A complete professional email without any placeholders, brackets, or instructions.
+    The email should be:
+    - Ready to send immediately
+    - Personalized with actual names and details
+    - Professional and engaging
+    - Highlighting relevant qualifications
+    - Free of any [bracketed instructions] or placeholder text
+    
+    Format:
+    Subject: Application for [Position] - [Candidate Name]
+    
+    Dear Hiring Manager,
+    
+    [Complete email body using only available information]
+    
+    Best regards,
+    [Candidate's actual name]
+  agent: email_writer

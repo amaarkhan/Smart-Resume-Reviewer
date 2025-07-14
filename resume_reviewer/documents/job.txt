@@ -1,0 +1,42 @@
+About the job
+Detailed Job Description
+
+Job Title: Front end Intern
+
+Department: Technology
+
+Location: Johar Town, Lahore
+
+Company : Axiom World
+
+Summary
+
+This internship provides an opportunity to gain practical experience in Front end
+
+Development, working alongside experienced professionals and contributing to the
+
+organization's financial operations. The intern will assist with various tasks, gaining
+
+valuable skills and knowledge in the field.
+
+Job Description
+
+We are looking for a passionate Front-End Developer to join our team. The ideal
+
+candidate should have basic knowledge of HTML5, CSS3, and JavaScript, with a keen
+
+interest in creating responsive and user-friendly interfaces.
+
+Responsibilities
+
+ Experience: Fresh to 3 months
+ Develop and maintain web applications.
+ Work with designers and backend teams for seamless UI/UX.
+ Optimize performance across devices and browsers.
+
+Requirements
+
+ Basic understanding of HTML, CSS, JavaScript.
+ Fresh Graduate in Computer Science .
+ Familiarity with React.js/Vue.js/Angular (a plus).
+ Strong problem-solving skills and eagerness to learn.

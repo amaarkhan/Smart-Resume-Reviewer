@@ -1,0 +1,33 @@
+[project]
+name = "resume_reviewer"
+version = "0.1.0"
+description = "AI-powered resume analysis and job matching backend using CrewAI"
+authors = [{ name = "Smart Resume Reviewer Team", email = "info@smartresumerviewer.com" }]
+requires-python = ">=3.10,<3.14"
+dependencies = [
+    "crewai[tools]>=0.140.0,<1.0.0",
+    "langchain>=0.1.0",
+    "langchain-community>=0.0.10",
+    "sentence-transformers>=2.2.0",
+    "faiss-cpu>=1.7.0",
+    "PyMuPDF>=1.23.0",
+    "numpy>=1.24.0,<2.0.0",
+    "python-dotenv>=1.0.0",
+    "flask>=2.3.0",
+    "werkzeug>=2.3.0",
+]
+
+[project.scripts]
+resume_reviewer = "resume_reviewer.main:run"
+run_crew = "resume_reviewer.main:run"
+train = "resume_reviewer.main:train"
+replay = "resume_reviewer.main:replay"
+test = "resume_reviewer.main:test"
+flask_app = "resume_reviewer.app:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.crewai]
+type = "crew"

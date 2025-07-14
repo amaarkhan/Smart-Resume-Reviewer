@@ -1,0 +1,163 @@
+
+SMART RESUME REVIEWER - DETAILED ANALYSIS REPORT
+Generated on: 2025-07-14 21:38:12
+Session ID: 291df23f-a5f7-4ac6-b5f4-fb876f4d8ca9
+
+============================================================
+MATCH SCORE: 36.4%
+============================================================
+
+RESUME ANALYSIS:
+----------------------------------------
+**1. Candidate Profile:**
+
+* **Name:** Amaar Khan
+* **Experience Level:** Undergraduate student with internship experience.
+
+
+**2. Core Technical Skills:**
+
+* **Programming Languages:** C, C++, Python, Java, JavaScript, C#
+* **Frameworks/Libraries:** React.js, Flutter, Tailwind CSS, PyTorch, scikit-learn, .NET Forms, SFML
+* **Databases:** SQL
+* **Tools:** HTML, CSS
+
+
+**3. Professional Experience:**
+
+* **Intern, TechValley:** July-August 2024 (Details on specific tasks or achievements are not provided in the resume)
+* **Intern, KP IT Board:** June 2024 (Details on specific tasks or achievements are not provided in the resume)
+
+
+**4. Education & Certifications:**
+
+* **Bachelor's in Computer Science:** 2022-2026, National University of Computer and Emerging Sciences
+* **FSC Pre-Engineering:** 2021-2022, Islamia Collage Peshawar
+
+
+**5. Notable Projects or Accomplishments:**
+
+* **TORCS Autonomous Agent:** Developed a fully autonomous driving agent using Python, PyTorch, and scikit-learn.  Trained a neural network and integrated it into a real-time client for self-driving control.
+* **Game Development:** Created Tetris, Space shooter, Interplanetary File System (DS), and Pacman games using threads and OS concepts (SFML C++).
+* **Flex Management System:** Developed a gym management system using C# and ASP.NET forms.
+* **Various Small Projects:** Created a portfolio website, Spotify clone, tic-tac-toe game, calculator, and animation car games using HTML, CSS, and JavaScript.  Additional projects are available on GitHub.
+
+
+**6. Soft Skills:**
+
+* **Critical Thinking:** Explicitly mentioned in skills section.
+* **Leadership:** Explicitly mentioned in skills section.  Further evidence could be inferred from project completion.
+
+**Additional Information:**
+
+* **Languages:** Urdu, English
+* **Online Presence:**  GitHub, LinkedIn, personal website
+
+
+**Note:**  The resume lacks detail regarding specific achievements and responsibilities within the internship roles.  Quantifiable achievements would significantly strengthen the resume.
+
+JOB DESCRIPTION ANALYSIS:
+----------------------------------------
+**1. Position Overview:**
+
+* **Job Title:** Front-end Intern
+* **Company:** Axiom World
+* **Location:** Johar Town, Lahore
+* **Experience Level:** Fresh to 3 months of experience
+
+**2. Required Technical Skills:**
+
+* **Must-Have:** Basic understanding of HTML, CSS, JavaScript.
+* **Nice-to-Have:** Familiarity with React.js/Vue.js/Angular.
+
+**3. Education & Experience Requirements:**
+
+* **Education:** Fresh Graduate in Computer Science.
+* **Experience:** 0-3 months of experience.
+
+**4. Key Responsibilities and Expectations:**
+
+* Develop and maintain web applications.
+* Work with designers and backend teams for seamless UI/UX.
+* Optimize performance across devices and browsers.
+
+**5. Company Culture & Values:**
+
+* No explicit mention of company culture or values in the provided job description.
+
+**6. Growth Opportunities:**
+
+* The job description mentions gaining practical experience and valuable skills and knowledge in the field, implying potential for growth.  However, no specific growth opportunities are detailed.
+
+SKILLS MATCHING ANALYSIS:
+----------------------------------------
+```
+╔═══════════════════════════════════════════════════════════════════╗
+║                   SMART RESUME REVIEWER REPORT                   ║
+║                      Generated on 14/07/2025                      ║
+╚═══════════════════════════════════════════════════════════════════╝
+
+👤 CANDIDATE: Candidate
+🏢 POSITION: Front end Intern at Axiom World
+📅 ANALYSIS DATE: July 14, 2025 at 09:36 PM
+
+
+🔴 MATCH SCORE: 36.4% - NEEDS IMPROVEMENT
+[███████░░░░░░░░░░░░░] 36.4%
+
+
+
+┌─────────────────────────────────────────────────────────────────┐
+│                        SKILLS ANALYSIS                         │
+├─────────────────────────────────────────────────────────────────┤
+│ ✅ MATCHING SKILLS                                              │
+├─────────────────────────────────────────────────────────────────┤
+│ css • html • javascript                                         │
+│ react                                                           │
+├─────────────────────────────────────────────────────────────────┤
+│ ❌ SKILLS TO DEVELOP                                            │
+├─────────────────────────────────────────────────────────────────┤
+│ vue • and knowledge in the field. job description we are l...   │
+│ and javascript • angular • css3                                 │
+│ with a keen interest in creating responsive and user-frien...   │
+└─────────────────────────────────────────────────────────────────┘
+
+
+┌─────────────────────────────────────────────────────────────────┐
+│                       CANDIDATE PROFILE                        │
+├─────────────────────────────────────────────────────────────────┤
+│ Experience Level: 0 years                                    │
+│ Education: BACHELORS                                      │
+│ Skills Count: 4 matching, 7 to develop                     │
+└─────────────────────────────────────────────────────────────────┘
+
+📋 PROFESSIONAL RECOMMENDATIONS:
+Your resume shows a low match with this position.. Focus on developing key skills like: vue, and knowledge in the field. job description we are looking for a passionate front-end developer to join our team. the ideal candidate should have basic knowledge of html5, javascript. fresh graduate in computer science . familiarity with react.js vue.js angular (a plus). strong problem-solving skills and eagerness to learn. and 4 others. Consider tailoring your resume to better highlight relevant experience for this role..
+
+═══════════════════════════════════════════════════════════════════
+Report generated by Smart Resume Reviewer AI • Powered by CrewAI
+
+```
+
+GENERATED APPLICATION EMAIL:
+----------------------------------------
+Subject: Application for Front end Intern - Amaar Khan
+
+Dear Hiring Manager,
+
+I am writing to express my keen interest in the Front-end Intern position at Axiom World, as advertised [Platform where you saw the advertisement - if known, otherwise omit this part].  As an undergraduate Computer Science student at the National University of Computer and Emerging Sciences, I possess a foundational understanding of HTML, CSS, and JavaScript, complemented by practical experience in React.js and a strong portfolio of projects demonstrating my skills.
+
+My experience includes developing a fully autonomous driving agent using Python, PyTorch, and scikit-learn, as well as creating several games using C++ and SFML. I've also built a gym management system using C# and ASP.NET forms, and various smaller projects showcasing my proficiency in front-end development using HTML, CSS, and JavaScript.  These projects have honed my problem-solving abilities and instilled in me a strong work ethic and eagerness to learn.
+
+My internships at TechValley and KP IT Board have further enhanced my practical skills and understanding of professional work environments. I am confident that my skills and enthusiasm align perfectly with the requirements of this internship and I am eager to contribute to Axiom World.
+
+Thank you for your time and consideration.
+
+Best regards,
+
+Amaar Khan
+
+============================================================
+Report generated by Smart Resume Reviewer
+AI-powered resume analysis and job matching system
+============================================================

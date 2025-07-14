@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block title %}Smart Resume Reviewer - AI-Powered Resume Analysis{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card text-center">
+            <div class="card-body p-5">
+                <i class="fas fa-robot text-primary mb-4" style="font-size: 4rem;"></i>
+                <h1 class="card-title mb-4">Smart Resume Reviewer</h1>
+                <p class="card-text lead mb-4">
+                    AI-powered resume analysis and job matching system that provides detailed insights, 
+                    skill gap analysis, and generates professional application emails.
+                </p>
+                
+                <div class="row mb-4">
+                    <div class="col-md-4 mb-3">
+                        <div class="feature-card p-3">
+                            <i class="fas fa-chart-line text-primary mb-2" style="font-size: 2rem;"></i>
+                            <h5>Match Analysis</h5>
+                            <p class="small text-muted">Get precise compatibility scores between your resume and job requirements</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="feature-card p-3">
+                            <i class="fas fa-cogs text-success mb-2" style="font-size: 2rem;"></i>
+                            <h5>Skills Gap</h5>
+                            <p class="small text-muted">Identify missing skills and get recommendations for improvement</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="feature-card p-3">
+                            <i class="fas fa-envelope text-warning mb-2" style="font-size: 2rem;"></i>
+                            <h5>Email Generator</h5>
+                            <p class="small text-muted">Generate professional application emails tailored to the job</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <a href="{{ url_for('upload_page') }}" class="btn btn-primary btn-lg">
+                    <i class="fas fa-upload me-2"></i>Start Analysis
+                </a>
+            </div>
+        </div>
+        
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <i class="fas fa-rocket text-primary me-2"></i>How It Works
+                        </h5>
+                        <ol class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-upload text-primary me-2"></i>Upload your resume (PDF)</li>
+                            <li class="mb-2"><i class="fas fa-clipboard-list text-success me-2"></i>Paste the job description</li>
+                            <li class="mb-2"><i class="fas fa-brain text-warning me-2"></i>AI analyzes and matches</li>
+                            <li class="mb-2"><i class="fas fa-chart-pie text-info me-2"></i>Get detailed results</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <i class="fas fa-star text-warning me-2"></i>Key Features
+                        </h5>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>AI-powered analysis</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Skill gap identification</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Match percentage scoring</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Professional email generation</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.feature-card {
+    transition: all 0.3s ease;
+    border-radius: 15px;
+}
+.feature-card:hover {
+    transform: translateY(-5px);
+    background: rgba(59, 130, 246, 0.05);
+}
+</style>
+{% endblock %}
