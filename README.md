@@ -10,13 +10,15 @@
 
 ## 📸 See It In Action
 
-### Real-Time Analysis Progress
-![Analysis Progress](assets/analysis-progress.png)
-*Watch as AI agents analyze your resume step by step*
+<img width="1919" height="1017" alt="image" src="https://github.com/user-attachments/assets/9da2ac60-f67b-4dfb-92b2-f160cc93c233" />
+
+<img width="1843" height="1077" alt="Screenshot 2025-07-14 213855" src="https://github.com/user-attachments/assets/fdb3e341-fb0f-4853-b994-7ebeb8026eb6" />
+
+<img width="1566" height="652" alt="Screenshot 2025-07-14 213948" src="https://github.com/user-attachments/assets/599f868b-d785-42ed-b0fc-2f4ab3cebb50" />
+
 
 ### Comprehensive Results Dashboard  
-![Results Dashboard](assets/results-dashboard.png)
-*Get detailed match scores, skills analysis, and professional recommendations*
+
 
 ## ✨ What Can It Do For You?
 
